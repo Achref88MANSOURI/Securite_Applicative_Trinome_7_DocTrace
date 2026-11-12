@@ -1,24 +1,22 @@
-# 📑 Fiche d'Attribution, d'Intégrité Académique et d'Usage de l'IA
-
-Ce document doit être obligatoirement complété, signé numériquement par chaque membre de l'équipe, et maintenu à jour à la racine du dépôt GitHub à chaque jalon.
+#  Fiche d'Attribution, d'Intégrité Académique et d'Usage de l'IA
 
 ---
 
-## 👥 1. Identification de l'Équipe & Rôles
+##  1. Identification de l'Équipe & Rôles
 
 * **Établissement :** École Supérieure des Communications de Tunis (SUP'COM)
 * **Année universitaire :** 2026–2027
-* **Groupe / Trinôme ou Binôme N° :** [Ex: Trinôme 1/2/3/4/5/6/7 ou Binôme 8/9]
-* **Nom de l'Application Métier :** [Ex: DocTrace]
+* **Trinôme N° :** Trinôme 7
+* **Nom de l'Application Métier :** **DocTrace**
 
 ### Membres de l'équipe :
-1. **[NOM Prénom 1]** - Email : `...` - Rôle principal : [Ex: Lead Dev Backend / Expert Crypto]
-2. **[NOM Prénom 2]** - Email : `...` - Rôle principal : [Ex: Dev Frontend PWA / Expert SRE]
-3. **[NOM Prénom 3]** - Email : `...` - Rôle principal : [Ex: Expert Modélisation des menaces] *(À supprimer si binôme)*
+1. **AYED Mohamed Amin ** - Email : `mohamedamin.ayed@supcom.tn` - Rôle principal : Architecture Designer
+2. **BEN AMEUR Ahmad** - Email : `ahmad.benameur@supcom.tn` - Rôle principal : Security Engineer
+3. **MANSOURI Achraf** - Email : `achraf.mansour@supcom.tn` - Rôle principal : Expert Modélisation des menaces
 
 ---
 
-## 📜 2. Déclaration d'Intégrité et d'Anti-Plagiat
+##  2. Déclaration d'Intégrité et d'Anti-Plagiat
 
 Par la présente, nous certifions sur l'honneur que :
 * L'architecture, la conception logicielle et l'implémentation métier de cette application sont le fruit de notre propre travail d'équipe.
@@ -27,27 +25,27 @@ Par la présente, nous certifions sur l'honneur que :
 
 ---
 
-## 🤖 3. Déclaration de l'Usage des Intelligences Artificielles (IA)
+##  3. Déclaration de l'Usage des Intelligences Artificielles (IA)
 
 Conformément aux directives de l'atelier, l'usage de l'IA (ChatGPT, Claude, GitHub Copilot, etc.) est autorisé exclusivement comme **assistant à la réflexion, à la structuration ou au débogage**, et non comme substitut à la production intellectuelle.
 
-### 📊 Tableau de transparence IA (À compléter obligatoirement)
+###  Tableau de transparence IA (À compléter obligatoirement)
 
 | Composant / Phase | IA utilisée (Nom/Version) | Pourcentage estimé de contenu généré | Rôle précis de l'IA & Prompts clés utilisés |
 | :--- | :--- | :--- | :--- |
-| **Phase 1 : Exigences (SRE)** | [Ex: Claude 3.5 Sonnet] | [Ex: 20%] | *Aide à la mise en page Markdown du tableau CIA. Prompt : "Structure-moi un tableau propre pour..."* |
-| **Phase 2 : Threat Modelling** | [Ex: ChatGPT 4o] | [Ex: 15%] | *Brainstorming sur les vecteurs d'attaque STRIDE spécifiques à la Heap Java 25.* |
-| **Développement Backend** | [Ex: GitHub Copilot] | [Ex: 30%] | *Autocomplétion des structures répétitives des contrôleurs Jakarta REST (JAX-RS).* |
-| **Moteur de Dissimulation** | [Ex: Aucun / 100% Humain]| [Ex: 0%] | *Algorithme LSB codé entièrement à la main.* |
+| **Phase 1 : Definition du fonctionnement coeur de l'application** | Claude 3.5 Sonnet |  20% | *Aide à la conception des diagrammes et redaction des descriptions* |
+| **Phase 2 : Exigences (SRE)** | Claude 3.5 Sonnet | 25% | *Aide à la redaction* |
+| **Phase 3 : Threat Modelling** | N/A | 0%] | *Amelioration du redaction, threat modeling manuel.* |
 
 ### 🛠️ Exemple de Prompt Clé (Le plus significatif utilisé par l'équipe) :
-> *"Fournir le prompt exact le plus complexe ou utile que vous avez soumis à l'IA pour ce jalon."*
+> *"le prompt exact le plus complexe ou utile que vous avez soumis à l'IA pour ce jalon."*
 
 ---
 
 ## ✍️ 4. Signatures des membres
 En inscrivant votre nom ci-dessous dans le commit de validation, vous signez électroniquement ce document et vous engagez sur l'exactitude des informations fournies.
 
-* **[NOM Prénom 1]** : [Engagé(e) / Date]
-* **[NOM Prénom 2]** : [Engagé(e) / Date]
-* **[NOM Prénom 3]** : [Engagé(e) / Date]
+
+* **[AYED Mohamed Amin]** : [Engagé / 11/11/2026]
+* **[BEN AMEUR Ahmad]** : [Engagé / 11/11/2026]
+* **[MANSOURI Achraf]** : [Engagé / 11/11/2026]
