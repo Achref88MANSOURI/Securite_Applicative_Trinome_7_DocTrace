@@ -35,7 +35,7 @@ Conformément aux directives de l'atelier, l'usage de l'IA (ChatGPT, Claude, Git
 | :--- | :--- | :--- | :--- |
 | **Phase 1 : Definition du fonctionnement coeur de l'application** | Claude 3.5 Sonnet |  20% | *Aide à la conception des diagrammes et redaction des descriptions* |
 | **Phase 2 : Exigences (SRE)** | Claude 3.5 Sonnet | 25% | *Aide à la redaction* |
-| **Phase 3 : Threat Modelling** | N/A | 0%] | *Amelioration du redaction, threat modeling manuel.* |
+| **Phase 3 : Analyse des risques** | N/A | 0%] | *Amelioration du redaction, analyse manuel.* |
 
 ### 🛠️ Exemple de Prompt Clé (Le plus significatif utilisé par l'équipe) :
 > *"le prompt exact le plus complexe ou utile que vous avez soumis à l'IA pour ce jalon."*
