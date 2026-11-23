@@ -1,0 +1,20 @@
+# Maven
+**/target/
+
+# Frontend
+**/node_modules/
+**/dist/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Operating system
+.DS_Store
+Thumbs.db
