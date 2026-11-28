@@ -28,6 +28,13 @@ jobs:
 
       - name: Build and verify backend
         run: mvn -B -ntp clean verify
+        
+      - name: Upload WAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: doctrace-api-war
+          path: doctrace-api/target/doctrace-api-0.1.0-SNAPSHOT.war
+          
 
   frontend:
     name: Frontend - React / PWA
