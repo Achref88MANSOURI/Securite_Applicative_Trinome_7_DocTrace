@@ -70,6 +70,7 @@ RUN:
 
 ```xml
 
-$env:Path = "$env:JAVA_HOME\bin;$env:Path" 
 $env:JAVA_HOME = 'C:\Program Files\Eclipse Adoptium\jdk-25.0.5.10002-hotspot'
+$env:Path = "$env:JAVA_HOME\bin;$env:Path" 
+
 ```

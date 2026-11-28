@@ -1,3 +1,4 @@
+
 name: DocTrace CI
 
 on:
@@ -30,7 +31,7 @@ jobs:
 
   frontend:
     name: Frontend - React / PWA
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     defaults:
       run:
@@ -55,3 +56,127 @@ jobs:
 
       - name: Build React PWA
         run: npm run build
+
+
+  secrets:
+    name: Security - Gitleaks
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Detect exposed secrets
+        uses: gitleaks/gitleaks-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  wildfly-integration:
+    name: Integration - WildFly 42
+    runs-on: ubuntu-22.04
+    needs: backend
+    timeout-minutes: 15
+
+    steps:
+      - name: Configure Java 25
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - name: Download WAR artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: doctrace-api-war
+          path: target
+
+      - name: Download WildFly 42
+        run: |
+          curl -fL \
+            https://github.com/wildfly/wildfly/releases/download/42.0.0.Final/wildfly-42.0.0.Final.tar.gz \
+            -o wildfly.tar.gz
+
+          tar -xzf wildfly.tar.gz
+
+      - name: Start WildFly, deploy WAR and test health endpoint
+        run: |
+          set -euo pipefail
+
+          WILDFLY_HOME="$PWD/wildfly-42.0.0.Final"
+          WAR="$PWD/target/doctrace-api-0.1.0-SNAPSHOT.war"
+
+          "$WILDFLY_HOME/bin/standalone.sh" \
+            -b 127.0.0.1 \
+            > "$RUNNER_TEMP/wildfly.log" 2>&1 &
+
+          WILDFLY_PID=$!
+
+          cleanup() {
+            "$WILDFLY_HOME/bin/jboss-cli.sh" \
+              --connect \
+              --command=":shutdown" \
+              >/dev/null 2>&1 || true
+
+            kill "$WILDFLY_PID" 2>/dev/null || true
+            wait "$WILDFLY_PID" 2>/dev/null || true
+          }
+
+          trap cleanup EXIT
+
+          echo "Waiting for WildFly..."
+
+          READY=false
+
+          for i in $(seq 1 60); do
+            if "$WILDFLY_HOME/bin/jboss-cli.sh" \
+                --connect \
+                --command=":read-attribute(name=server-state)" \
+                2>/dev/null | grep -q '"running"'; then
+
+              READY=true
+              break
+            fi
+
+            sleep 2
+          done
+
+          if [ "$READY" != "true" ]; then
+            echo "WildFly failed to start."
+            cat "$RUNNER_TEMP/wildfly.log"
+            exit 1
+          fi
+
+          echo "Deploying WAR..."
+
+          "$WILDFLY_HOME/bin/jboss-cli.sh" \
+            --connect \
+            --command="deploy $WAR"
+
+          echo "Checking /api/health..."
+
+          RESPONSE=""
+
+          for i in $(seq 1 30); do
+            RESPONSE=$(curl -fsS \
+              http://127.0.0.1:8080/api/health \
+              2>/dev/null) || true
+
+            if echo "$RESPONSE" | grep -q '"status":"UP"'; then
+              break
+            fi
+
+            sleep 2
+          done
+
+          if ! echo "$RESPONSE" | grep -q '"status":"UP"'; then
+            echo "Health check failed."
+            echo "Response: $RESPONSE"
+            cat "$RUNNER_TEMP/wildfly.log"
+            exit 1
+          fi
+
+          echo "WildFly deployment successful."
+          echo "Health endpoint responded successfully."
